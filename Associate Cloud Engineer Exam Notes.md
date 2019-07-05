@@ -11,18 +11,18 @@ Here is the notes related to the exam. It will be divided into sections where we
 ### > Google Innovations 
 
 - Google is all about Big Data and Huge Scalability
-- Published a lot of whitepapers, Example:
+- Published a lot of **whitepapers**, Example:
   - _MapReduce_
   - _Google File System_
   - _Colosus_
-- Released some of it's innovation as _open source tools_, Example:
+- Released some of it's innovation as **open source tools**, Example:
   - _Kubernetes_, from project called _Borg_
-- Commercialize some of it's internal tools, Example:
+- **Commercialize** some of it's internal tools, Example:
   - _BigTable_
   - _Spanner_
   - _Google Cloud Storage (GCS)_, built on _Colossus_
   -  _BigQuery_, built on _Dremel_
-- Acquire some products, Example:
+- **Acquire** some products, Example:
   - _Firebase_
   - _Stackdriver_
 - Google hires _Site Reliability Engineer_ instead of _Operations people_ to manage their infrastructure. _Site Reliability Engineer_ are tasked to automate operation task and built reliability into the software.
