@@ -2,6 +2,8 @@
 
 ##### Read Time: ~5mins
 
+##### About : Console, Projects, Services Basics
+
 ### > Principle of Least Privilege (PoLP)
 
 - **Principle of Least Privilege (PoLP)**, or known as _Principle of minimal privilege_ enquires you to have minimal privilege possible to do a task in an abstract layer to ensure security.
@@ -170,3 +172,45 @@ gcloud projects get-iam-policy project-id-123
 gcloud projects remove-iam-policy-binding "project-id-123" --member='user:luthfi@gmail.com' --role='roles/editor'
 ```
 
+#### Service
+
+**Service** are basically a general term for products. Such as GCS, BigQuery, GKE, etc.
+
+##### Basic Commands
+
+```sh
+# List service available to you (enabled and available to be enabled)
+gcloud services list --available
+
+# List service enabled to you
+gcloud services list --enabled
+
+# Enabling PubSub (pubsub.googleapis.com)
+gcloud services enable pubsub.googleapis.com
+
+# Disabling PubSub (pubsub.googleapis.com)
+gcloud services disable pubsub.googleapis.com
+```
+
+#### Cloud IAM Roles
+
+Roles available to services
+
+- `roles/viewer` : Could only view. Operations available:
+  - get
+  - list: `gcloud services list`
+- `roles/editor` or `roles/owner`: Could edit and view. Operations available:
+  - get
+  - list: `gcloud services list`
+  - disable: `gcloud services disable`
+  - enable: `gcloud services enable`
+- `roles/serviceusage.serviceUsageViewer`: Could edit and view. Operations available:
+  - get
+  - list: `gcloud services list` 
+- `roles/serviceusage.serviceUsageAdmin`:  Could edit and view. Operations available:
+  - get
+  - list: `gcloud services list`
+  - disable: `gcloud services disable`
+  - enable: `gcloud services enable`
+- `roles/servicemanagement.serviceConsumer`: Could bind. Operations available:
+  - bind
