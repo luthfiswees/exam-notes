@@ -6,4 +6,5 @@ Here is the notes related to the exam. It will be divided into sections where we
 
 - [Part I - Introduction to GCP](part-1.md)
 - [Part II - Manage Account](part-2.md)
+- [Part III - Storage Solutions](part-3.md)
 

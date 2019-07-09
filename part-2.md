@@ -10,7 +10,7 @@
 
 - An **user**,  **program**, or **application** must be able to access **only** the resource it needed. Nothing more, nothing less.
 
-- In building any apps, VM's, etc. Make sure to follow this approach thoroughly to ensure security
+- In building any apps, VM's, etc. Make sure to follow this approach thoroughly to ensure security. This approach is implemented in IAM Policy Management.
 
 ### > Basic Console Commands
 
@@ -114,7 +114,7 @@ gcloud info
 gcloud help compute instances create
 ```
 
-#### Projects
+### > Projects
 
 ##### What is a Project?
 
@@ -172,7 +172,7 @@ gcloud projects get-iam-policy project-id-123
 gcloud projects remove-iam-policy-binding "project-id-123" --member='user:luthfi@gmail.com' --role='roles/editor'
 ```
 
-#### Service
+### > Service
 
 **Service** are basically a general term for products. Such as GCS, BigQuery, GKE, etc.
 
