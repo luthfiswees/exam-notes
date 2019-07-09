@@ -23,6 +23,13 @@ Basically, you could use [this calculator](https://cloud.google.com/products/cal
   - `nearline` (Occasional Archival Data)
   - `coldline` (Rare Archival Data)
 
+##### Concepts
+
+- **Object** stored inside a **bucket**
+- **Object** named with **/** are directories. It could contain multiple **objects** inside it. Ex: `ayam/bakar.jpg` object consist of directory `ayam` and file object named `bakar.jpg`. If other object uploaded like `ayam/goreng.jpg`, it will create a `goreng.jpg` file inside `ayam` directory. Where `goreng.jpg` file stored in the same directory as `bakar.jpg`.
+- **Object** naming conventions follows filesystem rules. You **cannot** create an object like `ayam//goreng` since it's not a valid filepath name.
+- **Bucket** have access control (usually abbreviated as `acl`). It could be set to `public` (everyone could see the content) or the owner could set it as it fits.
+
 ##### Command Line Basics (gsutil)
 
 ###### Create Bucket
