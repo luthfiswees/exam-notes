@@ -231,17 +231,16 @@ gcloud spanner databases execute-sql ayam --instance=project-id-123 \
 - **Documents** store data in **JSON**-like format.
 
   ```json
-  # Example of Document instances
   {
-  	"name": "Luthfi Putra",
-    "age": 25,
-    "occupation": "Engineer",
-  	"address": {
-      "street": "Kenanga St.",
-      "number": "10",
-      "city": "Jakarta",
-      "province": "DKI Jakarta"
-    }
+     "name":"Luthfi Putra",
+     "age":25,
+     "occupation":"Engineer",
+     "address":{
+        "street":"Kenanga St.",
+        "number":"10",
+        "city":"Jakarta",
+        "province":"DKI Jakarta"
+     }
   }
   ```
 
