@@ -23,7 +23,7 @@ Basically, you could use [this calculator](https://cloud.google.com/products/cal
   - `nearline` (Occasional Archival Data)
   - `coldline` (Rare Archival Data)
 
-##### Concepts
+##### Basic Concepts
 
 - **Object** stored inside a **bucket**
 - **Object** named with **/** are directories. It could contain multiple **objects** inside it. Ex: `ayam/bakar.jpg` object consist of directory `ayam` and file object named `bakar.jpg`. If other object uploaded like `ayam/goreng.jpg`, it will create a `goreng.jpg` file inside `ayam` directory. Where `goreng.jpg` file stored in the same directory as `bakar.jpg`.
@@ -124,5 +124,88 @@ gsutil ls -L -b gs://opor/
 
 # Remove label with key "ayam" on bucket "opor"
 gsutil label ch -d ayam gs://opor/
+```
+
+#### II. Cloud Spanner
+
+##### Product Basic Information
+
+- **Spanner** is a relational database that is **horizontally scalable** 
+- **Spanner** is compatible with **SQL** operations
+
+##### Basic Concepts
+
+- **Spanner** applies **Relational Database** concepts
+
+- **Object** are represented inside **tables**. **Table** have **column** that represents that object properties and **rows** that represent a single instance of that object. Every row represent a single set of data that is called **tuples**.
+
+  - Example of table **User**
+
+    | id   | name          | occupation | age  |
+    | ---- | ------------- | ---------- | ---- |
+    | 1    | Luthfi Kurnia | Student    | 17   |
+    | 2    | Luthfi Putra  | Engineer   | 25   |
+
+    We could say that **User** object have four properties. That is _id_, _name_, _occupation_, and _age_.
+
+- A **Table** could be related to other tables to represent something as a whole.
+
+  - Example of table **Transaction**. This table is related to table **User** presented above.
+
+    | id   | amount | payment_type | user_id |
+    | ---- | ------ | ------------ | ------- |
+    | 1    | 50000  | cash         | 2       |
+    | 2    | 300000 | credit_card  | 2       |
+    | 3    | 20000  | cash         | 1       |
+    | 4    | 1000   | cash         | 1       |
+
+    Property _user_id_ is related to **User** tables. Which means that user with id `1` is creating transaction with id `3` and `4`.
+
+  - The tables could be related in any way as you like. As long as it makes sense to you. That's why it called _relational_. Tables could relate to each other in some ways.
+
+##### Command Line Basics
+
+###### Creating Instances
+
+```sh
+# Create an instance with name "ayam goreng" and id "project-id-123", cluster type would be "regional" in "us-central1" and node needed will be "2"
+gcloud spanner instances create project-id-123 --config=regional-us-central1 --description="ayam goreng" --nodes=2
+```
+
+Available value for cluster type is:
+
+- `regional`
+- `multi-region`
+
+###### List Instances
+
+```sh
+# List spanner instances
+gcloud spanner instances list
+```
+
+###### Editing an Instance
+
+```sh
+# Change instance name to "bebek sawah" to instance "project-id-123"
+gcloud spanner instances update project-id-123 --description="bebek sawah"
+
+# Change node count to 3 to instance "project-id-123"
+gcloud spanner instances update project-id-123 --nodes=3
+```
+
+###### Delete an Instance
+
+```sh
+# Delete an instance with instance id "project-id-123"
+gcloud spanner instances delete project-id-123
+```
+
+###### Executing Query 
+
+```sh
+# Perform SQL query in instance "project-id-123" in db "ayam"
+gcloud spanner databases execute-sql ayam --instance=project-id-123 \
+--sql="INSERT Singers (SingerId, FirstName, LastName) VALUES (1, 'Marc', 'Richards')"
 ```
 
