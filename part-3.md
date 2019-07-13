@@ -380,3 +380,8 @@ firestore.batch do |b|
 end
 ```
 
+### > Decide on Storage Solutions
+
+Use this decision tree to decide which storage solutions to use in certain situations.
+
+![Storage Solutions Decision Tree](resources/gcace-image-1.png)
