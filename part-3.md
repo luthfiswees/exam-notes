@@ -2,7 +2,7 @@
 
 ##### Read Time: ~10mins
 
-##### About: GCS
+##### About: GCS, Spanner, Firestore
 
 ### > Planning Service Resources
 
