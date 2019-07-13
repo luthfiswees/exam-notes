@@ -385,3 +385,5 @@ end
 Use this decision tree to decide which storage solutions to use in certain situations.
 
 ![Storage Solutions Decision Tree](resources/gcace-image-1.png)
+
+Some of them are not presented in this notes. But the product did exist and you could explore it more if you want to.
