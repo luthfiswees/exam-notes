@@ -32,6 +32,8 @@ Basically, you could use [this calculator](https://cloud.google.com/products/cal
 
 ##### Command Line Basics (gsutil)
 
+[Source](https://cloud.google.com/storage/docs/quickstart-gsutil)
+
 ###### Create Bucket
 
 ```sh
@@ -165,6 +167,8 @@ gsutil label ch -d ayam gs://opor/
 
 ##### Command Line Basics
 
+[Source](https://cloud.google.com/spanner/docs/create-manage-instances)
+
 ###### Creating Instances
 
 ```sh
@@ -207,5 +211,173 @@ gcloud spanner instances delete project-id-123
 # Perform SQL query in instance "project-id-123" in db "ayam"
 gcloud spanner databases execute-sql ayam --instance=project-id-123 \
 --sql="INSERT Singers (SingerId, FirstName, LastName) VALUES (1, 'Marc', 'Richards')"
+```
+
+#### III. Cloud Firestore
+
+##### Product Basic Information
+
+- **Firestore** is a **Non-SQL**, Realtime database that is scalable
+- **Firestore** have offline support. Ideal for realtime client interactions.
+
+##### Basic Concepts
+
+- **Data** stored inside **collections**
+
+- **Collections** store instances of objects called **documents**.
+
+  - **User** collections store instances of **user** documents.
+
+- **Documents** store data in **JSON**-like format.
+
+  ```json
+  # Example of Document instances
+  {
+  	"name": "Luthfi Putra",
+    "age": 25,
+    "occupation": "Engineer",
+  	"address": {
+      "street": "Kenanga St.",
+      "number": "10",
+      "city": "Jakarta",
+      "province": "DKI Jakarta"
+    }
+  }
+  ```
+
+##### Firestore Operations
+
+[Source](https://firebase.google.com/docs/firestore/quickstart)
+
+Basically, you could use other programming language to interact with **Firestore**. Here, I will use **Ruby** to demonstrate some capabilities. For me, it's simpler this way. 
+
+###### Setup Development Environment
+
+Setup your env variable to your Google Credentials JSON files
+
+```sh
+export GOOGLE_APPLICATION_CREDENTIALS="path/to/your/keyfile.json"
+```
+
+It is not needed in production environment if you run your production environment in the same project where the **Firestore** is enabled.
+
+Then add the SDK to your `Gemfile`
+
+```ruby
+gem "google-cloud-firestore"
+```
+
+And install your dependencies
+
+```sh
+bundle install
+```
+
+###### Initialize Firestore
+
+```ruby
+require "google/cloud/firestore"
+
+firestore = Google::Cloud::Firestore.new project_id: project_id
+
+puts "Created Cloud Firestore client with given project ID."
+```
+
+###### Add Data
+
+```ruby
+# Add document "alovelace" to "users" collection 
+doc_ref = firestore.doc "users/alovelace"
+
+doc_ref.set(
+  first: "Ada",
+  last:  "Lovelace",
+  born:  1815
+)
+```
+
+###### Read Data
+
+```ruby
+# Read data in "users" collection
+users_ref = firestore.col "users"
+users_ref.get do |user|
+  puts "#{user.document_id} data: #{user.data}."
+end
+```
+
+###### Update Data
+
+```ruby
+# Update document "frank" in "users" collection
+frank_ref = firestore.doc "users/frank"
+frank_ref.set(
+  name:      "Frank",
+  favorites: {
+    food:    "Pizza",
+    color:   "Blue",
+    subject: "Recess"
+  },
+  age:       12
+)
+
+# Update document "frank" age and favorite color
+frank_ref.update age: 13, "favorites.color": "Red"
+```
+
+###### Delete Data
+
+```ruby
+# Delete "alanturing" documents in "users" collection
+users_ref = firestore.doc "users/alanturing"
+users_ref.delete
+```
+
+###### Write a Transaction
+
+A **transaction** is basically a set of operations tied together. If one operation in a transaction fails. It will fail altogether.
+
+It exist to implement **Atomic** operations concept.
+
+```ruby
+def return_info_transaction project_id:
+  # project_id = "Your Google Cloud Project ID"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+
+  city_ref = firestore.doc "cities/SF"
+
+  updated = firestore.transaction do |tx|
+    new_population = tx.get(city_ref).data[:population] + 1
+    if new_population < 1_000_000
+      tx.update city_ref, population: new_population
+    else
+      false
+    end
+  end
+
+  if updated
+    puts "Population updated!"
+  else
+    puts "Sorry! Population is too big."
+  end
+end
+```
+
+###### Batch Write
+
+You could use batch write if you **don't need to do any read operations**. It's basically a transaction without any read commands in it.
+
+```ruby
+firestore.batch do |b|
+  # Set the data for NYC
+  b.set "cities/NYC", name: "New York City"
+
+  # Update the population for SF
+  b.update "cities/SF", population: 1_000_000
+
+  # Delete LA
+  b.delete "cities/LA"
+end
 ```
 
