@@ -45,6 +45,33 @@ To create instance you could issue the command
 gcloud compute instances create AyamVM --zone europe-west1-b --image-family ubuntu-1804-lts --image-project gce-uefi-images
 ```
 
+You could also mention the machine types that you want. The default machine types are `n1-standard`.
+
+```sh
+# Create instance with:
+# -> Instance Name "AyamVM"
+# -> Image Family "ubuntu-1804-lts"
+# -> Image project "gce-uefi-images"
+# -> Zone "europe-west1-b"
+# -> Machine Type "f1-micro"
+gcloud compute instances create AyamVM --zone europe-west1-b --image-family ubuntu-1804-lts --image-project gce-uefi-images --machine-type f1-micro 
+```
+
+###### See Available Machine Types
+
+To see machine type available to you. Y ou could issue this command
+
+```sh
+# List machine types available
+gcloud compute machine-types list
+
+# List machine types with name "f1-micro"
+gcloud compute machine-types list --filter="NAME:f1-micro"
+
+# List machine types with name "f1-micro" and available in "us-west" zones
+gcloud compute machine-types list --filter="NAME:f1-micro AND ZONE~us-west"
+```
+
 ###### Accessing the Instance
 
 You could ssh into your VM by using this command
