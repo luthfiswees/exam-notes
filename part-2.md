@@ -172,6 +172,33 @@ gcloud projects get-iam-policy project-id-123
 gcloud projects remove-iam-policy-binding "project-id-123" --member='user:luthfi@gmail.com' --role='roles/editor'
 ```
 
+### > Config
+
+**Config** is a value that could be set for your convenience. Usually it stores default value for you to use when your navigating through **gcloud**.
+
+Here is the generic format for config
+
+```sh
+# To set a config variable
+gcloud config set <VARIABLE_NAME> <VARIABLE_VALUE>
+
+# To unset a config variable
+gcloud config unset <VARIABLE_NAME>
+```
+
+Here is some properties that is useful to set in your config
+
+```sh
+# Set default project (example with project name "ayam-project-123")
+gcloud config set project ayam-project-123
+
+# Set default region for Compute Engine
+gcloud config set compute/region us-west1
+
+# Set default zone for Compute Engine
+gcloud config set compute/zone us-west1-b
+```
+
 ### > Service
 
 **Service** are basically a general term for products. Such as GCS, BigQuery, GKE, etc.
